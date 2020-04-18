@@ -22,7 +22,7 @@
         <spring.security.test.version>4.2.15.RELEASE</spring.security.test.version>
         <view.resolver.version>3.0.9.RELEASE</view.resolver.version>
         <junit.version>4.12</junit.version>
-        <jackson.databind>2.5.1</jackson.databind>
+        <jackson.databind>2.10.3</jackson.databind>
     </properties>
     <dependencyManagement>
         <dependencies>
