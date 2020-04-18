@@ -3,7 +3,6 @@ package com.reverse.kt.main.controller;
 import com.reverse.kt.core.ui.RegistrationModelView;
 import com.reverse.kt.main.service.CompanyService;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,12 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
 
 /**
  * Created by vikas on 16-04-2020.
  */
-@Slf4j
+
 @Controller
 @Setter(onMethod = @__(@Inject))
 public class LoginController {
@@ -56,14 +54,14 @@ public class LoginController {
             registrationModelView.setShowSection(fl);
             model.addAttribute("regVO",registrationModelView);
         }catch(Exception e){
-            log.error("Error in loadRegister with",e);
+            e.printStackTrace();
         }
         return "registration";
     }
 
     //Check if the user exists.Make entries in the respective tables
     @GetMapping(value="/register-save")
-    public String registerUser(Model m,@ModelAttribute @Valid RegistrationModelView registrationModelView, @RequestParam String fl){
+    public String registerUser(Model m,@ModelAttribute RegistrationModelView registrationModelView, @RequestParam String fl){
         try{
             System.out.println(registrationModelView.toString());
         }catch(Exception e){

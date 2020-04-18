@@ -70,10 +70,6 @@
             <artifactId>thymeleaf</artifactId>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring4</artifactId>
         </dependency>
@@ -88,10 +84,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -126,8 +118,6 @@
                     <configuration>
                         <contextFile>${project.basedir}/src/main/webapp/META-INF/context.xml</contextFile>
                     </configuration>
-                    <!-- Config: contextPath and Port (Default - /SimpleMavenWebApp : 8080) -->
-                    <!-- <configuration> <path>/</path> <port>8899</port> </configuration> -->
                 </plugin>
             </plugins>
     </build>

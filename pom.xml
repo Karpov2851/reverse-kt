@@ -23,7 +23,6 @@
         <view.resolver.version>3.0.9.RELEASE</view.resolver.version>
         <junit.version>4.12</junit.version>
         <jackson.databind>2.5.1</jackson.databind>
-        <log4j.version>1.2.17</log4j.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -49,12 +48,6 @@
                 <version>1.18.12</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
@@ -139,12 +132,6 @@
                 <artifactId>h2</artifactId>
                 <version>1.4.187</version>
                 <scope>test</scope>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>2.0.0.Final</version>
             </dependency>
 
             <dependency>
