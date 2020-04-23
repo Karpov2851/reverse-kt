@@ -43,6 +43,6 @@ public class UserProfile extends BaseEntity{
     @Column(name = "USER_ID",length = 50)
     private String userId;
 
-    @Column(name = "PASSWORD",length = 50)
+    @Column(name = "PASSWORD")
     private String password;
 }

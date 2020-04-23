@@ -2,6 +2,7 @@ package com.reverse.kt.core.dao;
 
 import com.reverse.kt.core.model.BaseEntity;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ public abstract class BaseTestDao<E extends BaseEntity,T extends GenericDao,PE e
 
     protected abstract E getSingleEntity();
     protected abstract T getDao();
+    @Test
     public abstract void verifySave();
 
     @Before

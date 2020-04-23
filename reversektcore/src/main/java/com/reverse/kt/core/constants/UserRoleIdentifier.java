@@ -1,4 +1,4 @@
-package com.reverse.kt.main.constants;
+package com.reverse.kt.core.constants;
 
 /**
  * Created by vikas on 17-04-2020.

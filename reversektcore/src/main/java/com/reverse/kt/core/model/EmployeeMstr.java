@@ -1,18 +1,36 @@
 package com.reverse.kt.core.model;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by vikas on 02-04-2020.
  */
 @Entity
 @Table(name="EMPLOYEE_MSTR")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class EmployeeMstr extends BaseEntity{
+
+    @Builder
+    public EmployeeMstr(CompanyMstr companyMstr,UserProfile userProfile,BusinessUnit businessUnit,ProjectItem projectItem,
+                        String employeeEmail,String employeeFirstName,String employeeLastName,
+                        Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+        super(createdBy,updatedBy,createdDate,updatedDate,'A');
+        this.companyMstr = companyMstr;
+        this.userProfile = userProfile;
+        this.businessUnit = businessUnit;
+        this.projectItem = projectItem;
+        this.employeeEmail = employeeEmail;
+        this.employeeFirstName = employeeFirstName;
+        this.employeeLastName = employeeLastName;
+    }
 
 
     @Id
@@ -30,6 +48,10 @@ public class EmployeeMstr extends BaseEntity{
 
     @OneToOne
     @JoinColumn(name = "BUSINESS_UNIT_SEQ")
+    private BusinessUnit businessUnit;
+
+    @OneToOne
+    @JoinColumn(name = "PROJECT_ITEM_SEQ")
     private ProjectItem projectItem;
 
     @Column(name = "EMPLOYEE_EMAIL",length = 50)
