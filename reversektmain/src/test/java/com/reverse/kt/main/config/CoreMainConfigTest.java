@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @ComponentScan(basePackages = {CoreMainConfig.CORE_MAIN_PACKAGE_NESTED,"com.reverse.kt.core.dao"},excludeFilters =
         {@ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, value=CoreMainConfig.class)})
-@Import({MvcConfig.class})
+@Import({DBMainTestConfig.class,MvcConfig.class})
 public class CoreMainConfigTest {
 
 }

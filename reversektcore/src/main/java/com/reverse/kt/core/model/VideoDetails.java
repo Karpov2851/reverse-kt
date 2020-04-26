@@ -25,9 +25,15 @@ public class VideoDetails extends BaseEntity{
     @JoinColumn(name = "PROJECT_ITEM_SEQ")
     private ProjectItem projectItem;
 
-    @Column(name = "VIDEO_DIRECTORY_PATH",length = 50)
+    @Column(name = "VIDEO_NAME")
+    private String videoName;
+
+    @Column(name = "VIDEO_DETAILS")
+    private String videoDetails;
+
+    @Column(name = "VIDEO_DIRECTORY_PATH")
     private String videoDirectoryPath;
 
-    @Column(name = "VIDEO_DIRECTORY_REF_CD",length = 50)
+    @Column(name = "VIDEO_DIRECTORY_REF_CD")
     private String videoDirectoryRefCd;
 }

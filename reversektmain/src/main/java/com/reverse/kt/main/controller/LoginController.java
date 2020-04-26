@@ -51,7 +51,7 @@ public class LoginController {
     }
 
     @GetMapping(value="/load-register")
-    public String loadRegister(Model model,@RequestParam String fl,@ModelAttribute RegistrationModelView rv){
+    public String loadRegister(Model model,@RequestParam(required = false,defaultValue = "N") String fl,@ModelAttribute RegistrationModelView rv){
         try{
             RegistrationModelView registrationModelView = loginProcessor.generateRegistrationModelView();
             if(rv!=null){

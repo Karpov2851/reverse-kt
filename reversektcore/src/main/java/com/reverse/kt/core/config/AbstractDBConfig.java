@@ -42,7 +42,7 @@ public abstract class AbstractDBConfig {
         return txManager;
     }
 
-    abstract DataSource getDataSource() throws NameNotFoundException;
+    public abstract DataSource getDataSource() throws NameNotFoundException;
 
-    abstract Properties getHibernateProperties();
+    public abstract Properties getHibernateProperties();
 }
