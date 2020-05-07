@@ -33,8 +33,19 @@ public class RegistrationModelView extends BaseModelView{
     private String projectItemSelected;
 
     @Builder
-    public RegistrationModelView(String showError,String showSuccess,String showSection){
-        super(showError,showSuccess,showSection);
+    public RegistrationModelView(String firstName,String lastName,String userName,String email,String pwd,String companySelected,boolean showError,boolean showSuccess,String showSection,String message){
+        super(showError,showSuccess,showSection,message);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.email = email;
+        this.pwd = pwd;
+        this.companySelected = companySelected;
+    }
+
+
+    public RegistrationModelView(boolean showError,boolean showSuccess,String showSection,String message){
+        super(showError,showSuccess,showSection,message);
     }
 
     //Drodown values
@@ -46,6 +57,16 @@ public class RegistrationModelView extends BaseModelView{
 
     private Map<String,Object> projectItemDropDown;
 
+    //TODO need to think about a cleaner solution. Just making it work now.
+    public static void generateLoginModel(RegistrationModelView r,String error,String logout){
+        r.setShowError(error.equals("true") && logout.equals("N"));
+        r.setShowSuccess(error.equals("false") && logout.equals("Y"));
+        if(error.equals("true")){
+            r.setMessage("Incorrect user id or password.");
+        }else if(logout.equals("Y")){
+            r.setMessage("User logged out successfully");
+        }
+    }
 
     @Override
     public String toString() {

@@ -1,8 +1,10 @@
 <html xmlns:th="https://thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}"/>
+    <script data-main="resources/js/app" th:src="@{/resources/js/vendor/require.js}"></script>
 </head>
+
 <body>
 <div id="fullscreen_bg" class="fullscreen_bg"/>
 <div class="container py-5" data-spy="scroll">
@@ -19,29 +21,34 @@
                             <h3 class="mb-0">Register User</h3>
                         </div>
                         <div class="card-body">
-                            <form class="form" role="form" th:action="@{/register-user}" th:object="${regVO}" method="post" autocomplete="off">
+
+                            <form class="form" id="reg-form" role="form" th:action="@{/register-save?fl=Y}" th:object="${regVO}" method="post" autocomplete="off">
+                                <div class="alert p-2 pb-3" th:classappend="${regVO.showError} ? alert-danger : alert-info" th:if="${regVO.showError == true || regVO.showSuccess == true}">
+                                    <a class="close font-weight-normal initialism" data-dismiss="alert" href="#"><samp>&times;</samp></a>
+                                    <span th:text="${regVO.message}"></span>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="text" th:field="${regVO.firstName}" placeholder="Enter First Name">
+                                        <input class="form-control" name="f-name" type="text" th:field="${regVO.firstName}" placeholder="Enter First Name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="text"  th:field="${regVO.lastName}" placeholder="Enter Last Name">
+                                        <input class="form-control" name="l-name" type="text"  th:field="${regVO.lastName}" placeholder="Enter Last Name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="email" th:field="${regVO.email}" placeholder="Enter Email">
+                                        <input class="form-control" name="email" required="required" type="email" th:field="${regVO.email}" placeholder="Enter Email">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Company</label>
                                     <div class="col-lg-9">
-                                        <select id="company" class="form-control"  th:field="${regVO.companySelected}">
+                                        <select id="company" name="company" required="required" class="form-control"  th:field="${regVO.companySelected}">
                                             <option value="">----Select----</option>
                                             <option th:each="entry : ${regVO.companyDropDown.entrySet()}" th:value="${entry.key}" th:text="${entry.value}">
 
@@ -49,62 +56,29 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row" th:if="${showSection == 'Y'}">
-                                    <label class="col-lg-3 col-form-label form-control-label">Business Unit</label>
-                                    <div class="col-lg-9">
-                                        <select id="business_unit" class="form-control" size="0">
-                                            <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                            <option value="Alaska">(GMT-09:00) Alaska</option>
-                                            <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                            <option value="Arizona">(GMT-07:00) Arizona</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row" th:if="${showSection == 'Y'}">
-                                    <label class="col-lg-3 col-form-label form-control-label">Project</label>
-                                    <div class="col-lg-9">
-                                        <select id="project" class="form-control" size="0">
-                                            <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                            <option value="Alaska">(GMT-09:00) Alaska</option>
-                                            <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                            <option value="Arizona">(GMT-07:00) Arizona</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row" th:if="${showSection == 'Y'}">
-                                    <label class="col-lg-3 col-form-label form-control-label">Project Item</label>
-                                    <div class="col-lg-9">
-                                        <select id="project_item" class="form-control" size="0">
-                                            <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                            <option value="Alaska">(GMT-09:00) Alaska</option>
-                                            <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                            <option value="Arizona">(GMT-07:00) Arizona</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="text" th:field="${regVO.userName}" placeholder="Enter User Name">
+                                        <input class="form-control" name="uname" required="required" type="text" th:field="${regVO.userName}" placeholder="Enter User Name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label" th:field="${regVO.pwd}">Password</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">Password</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control pwd" type="password" placeholder="Enter Password">
+                                        <input id="pwd" name="password" class="form-control pwd" th:field="${regVO.pwd}" required="required" type="password" placeholder="Enter Password">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Confirm</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">Confirm Password</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control pwd" type="password" placeholder="Re-Enter Password">
+                                        <input id="conf-pwd" name="conf-password" required="required" class="form-control pwd" type="password" placeholder="Re-Enter Password">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label"></label>
                                     <div class="col-lg-9">
                                         <input type="reset" id="reset-form" class="btn btn-secondary" value="Reset">
-                                        <input type="button" class="btn btn-primary" value="Save Changes">
+                                        <input type="submit" class="btn btn-primary" value="Save Changes">
                                     </div>
                                 </div>
                             </form>
@@ -118,6 +92,4 @@
     </div>
 </div>
 </body>
-<script th:href="@{/resources/vendor/jquery/jquery.min.js}"></script>
-<script th:href="@{/resources/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </html>

@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BaseModelView {
 
-    private String showError;
-    private String showSuccess;
+    private boolean showError;
+    private boolean showSuccess;
+    private String message;
     private String showSection;
 }

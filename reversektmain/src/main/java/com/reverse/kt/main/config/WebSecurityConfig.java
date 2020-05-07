@@ -15,7 +15,7 @@ import javax.inject.Inject;
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private CustomAuthenticationProvider customAuthenticationProvider;
@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .usernameParameter("username")//
                 .passwordParameter("password")
                 // Config for Logout Page
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout=true").and().exceptionHandling().accessDeniedPage("/denied");
     }
 
 }

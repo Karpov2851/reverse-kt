@@ -1,0 +1,117 @@
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <title>Reverse KT</title>
+    <meta charset="utf-8">
+    <script data-main="resources/js/app" th:src="@{/resources/js/vendor/require.js}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link th:href="@{/resources/css/bootstrap-datepicker.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/data-tables.min.css}" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Company Name</span>
+            </button>
+        </div>
+        <h1><a th:href="@{/history}" class="logo">Company Name</a></h1>
+        <div th:insert="~{fragments/sidebar :: sidebar}"></div>
+    </nav>
+    <input type="hidden" value="schedule_session" id="no-js"/>
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <h1>Schedule KT Session</h1>
+        <div class="container-fluid">
+            <div class="row">
+                <form>
+                    <div class="form-group">
+                        <label for="project-item" class="text-black-50 font-weight-bold">Select Video Name</label>
+                        <select class="form-control" id="project-item">
+                            <option>--Select--</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-time" class="text-black-50 font-weight-bold">Schedule Date</label>
+                        <div class="input-group date" id="date-time">
+                            <input type='text' class="form-control"/>
+                            <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h3 style="margin-bottom:20px;">Candidate List</h3>
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Select Candidate</th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1"></label>
+                                    </div>
+                                </td>
+
+                                <td>Tiger Nixon</td>
+                                <td>System Architect</td>
+                                <td>Edinburgh</td>
+                                <td>61</td>
+                                <td>2011/04/25</td>
+                                <td>$320,800</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <label class="custom-control-label" for="customCheck2"></label>
+                                    </div>
+                                </td>
+
+                                <td>Garrett Winters</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>63</td>
+                                <td>2011/07/25</td>
+                                <td>$170,750</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="form-group" style="margin-top:50px;">
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
