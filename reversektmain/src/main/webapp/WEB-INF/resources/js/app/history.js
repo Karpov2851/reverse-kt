@@ -4,7 +4,6 @@ define([
 
 ], function($,toastr) {
 
-
     function toasterOptions() {
         toastr.options = {
             "closeButton": false,
