@@ -1,0 +1,57 @@
+<html xmlns:th="https://thymeleaf.org">
+<head>
+
+    <title>Reverse KT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script data-main="resources/js/app" th:src="@{/resources/js/vendor/require.js}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}"/>
+</head>
+
+<body>
+
+<div class="wrapper d-flex align-items-stretch">
+
+    <nav id="sidebar">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Company Name</span>
+            </button>
+        </div>
+        <h1><a th:href="@{/history}" class="logo">Company Name</a></h1>
+        <div th:insert="~{fragments/sidebar :: sidebar}"></div>
+    </nav>
+    <input type="hidden" value="history" id="no-js"/>
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-3 mt-5">
+                    <div class="card text-center">
+                        <div class="card-header">
+
+                        </div>
+                        <div class="card-body" id="card">
+                            <h5 class="card-title">Video name</h5>
+                            <p class="card-text">Uploaded video detail description</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <div class="row">
+                                <a href="#" class="btn btn-primary">View detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,12 +1,12 @@
 package com.reverse.kt.main.security;
 
 import com.reverse.kt.main.service.UserService;
+import com.reverse.kt.main.util.MainCommonUtil;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -19,16 +19,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 
     private UserService userService;
 
-    private PasswordEncoder passwordEncoder;
+    private MainCommonUtil mainCommonUtil;
 
     @Inject
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
     @Inject
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+    public void setMainCommonUtil(MainCommonUtil mainCommonUtil) {
+        this.mainCommonUtil = mainCommonUtil;
     }
+
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -38,7 +39,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
         UsernamePasswordAuthenticationToken token = null;
 
         UserDetails userDetails = userService.loadUserByUsername(username);
-        if(userDetails!=null && passwordEncoder.matches(password,userDetails.getPassword()) ){
+        if(userDetails!=null && mainCommonUtil.getPasswordEncoder().matches(password,userDetails.getPassword()) ){
             token = new UsernamePasswordAuthenticationToken(
                     userDetails, userDetails.getPassword(),userDetails.getAuthorities());
         }

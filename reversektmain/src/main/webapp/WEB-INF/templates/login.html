@@ -1,6 +1,5 @@
 <html xmlns:th="https://thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}"/>
 </head>
 <body class="fullscreen_bg">
@@ -17,9 +16,9 @@
                             <h3 class="mb-0">Login</h3>
                         </div>
                         <div class="card-body">
-                            <div class="alert alert-danger p-2 pb-3" th:if="${regVO.showError == true}">
-                                <a class="close font-weight-normal initialism" data-dismiss="alert" href="#"><samp>&times;</samp></a>
-                                <span th:text="${regVO.message}"></span>
+                            <div class="alert alert-danger" th:if="${regVO.showError == true}">
+                                <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                                <strong th:text="${regVO.message}">Danger!</strong>
                             </div>
                             <form class="form" th:action="@{/j_spring_security_check}" role="form" autocomplete="off" id="loginForm" action="#" method="POST">
                                 <div class="form-group">
@@ -47,6 +46,5 @@
     </div>
 </div>
 </body>
-<script th:href="@{/resources/vendor/jquery/jquery.min.js}"></script>
-<script th:href="@{/resources/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
 </html>

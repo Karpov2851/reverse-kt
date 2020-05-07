@@ -80,11 +80,11 @@ public class LoginController {
         return loadRegister(m,fl,registrationModelView);
     }
 
-    @GetMapping(value="/home")
+    /*@GetMapping(value="/home")
     @PreAuthorize("hasAnyRole('ROLE_EMPLOYEE','ROLE_ADMIN','ROLE_PROJECT_MANAGER','ROLE_TECH_ARCH','ROLE_SCRUM_MSTR','ROLE_DIRECTOR')")
     public String home(){
         return "home";
-    }
+    }*/
 
     @GetMapping(value="/denied")
     public String denied(){
