@@ -46,7 +46,9 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
         this.root = this.criteriaQuery.from(persistanceClass);
     }
 
-
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 
     public T findById(Integer id){
         return (T)entityManager.find(this.persistanceClass,id);
@@ -87,6 +89,8 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
         final Date d = new Date();
         bean.setCreatedDate(d);
         bean.setUpdatedDate(d);
+        bean.setCreatedBy(0);
+        bean.setUpdatedBy(0);
     }
 
     private void initUpdate(final T bean) {

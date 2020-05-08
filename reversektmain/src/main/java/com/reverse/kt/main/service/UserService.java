@@ -35,7 +35,7 @@ public class UserService implements UserDetailsService{
             if(userProfile == null){
                 throw new UsernameNotFoundException("No user found");
             }
-            return CustomUser.builder().username(userProfile.getUserId()).password(userProfile.getPassword())
+            return CustomUser.builder().userProfileSeq(userProfile.getUserProfileSeq()).username(userProfile.getUserId()).password(userProfile.getPassword())
                     .authorities(Arrays.asList(new SimpleGrantedAuthority(userProfile.getUserRole().getUserRoleCd()))).build();
         }catch(Exception e){
            e.printStackTrace();
@@ -53,5 +53,9 @@ public class UserService implements UserDetailsService{
 
     public UserProfile fetchUserProfileByUserId(String userName) throws Exception{
         return userProfileDao.fetchUserProfileByUserId(userName);
+    }
+
+    public UserProfile fetchUserByProfileSeq(int userProfileSeq) throws Exception{
+        return userProfileDao.findById(userProfileSeq);
     }
 }

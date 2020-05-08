@@ -54,6 +54,10 @@ public class EmployeeMstr extends BaseEntity{
     @JoinColumn(name = "PROJECT_ITEM_SEQ")
     private ProjectItem projectItem;
 
+    @OneToOne
+    @JoinColumn(name = "DESIGNATION_MSTR_SEQ")
+    private DesignationMstr designationMstr;
+
     @Column(name = "EMPLOYEE_EMAIL",length = 50)
     private String employeeEmail;
 

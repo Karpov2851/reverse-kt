@@ -1,10 +1,15 @@
 define([
     'jquery',
-    'toastr'
+    'toastr',
+    'bootstrap'
 
-], function($,toastr) {
+], function($,toastr,bootstrap) {
 
+    $('[data-toggle="tooltip"]').tooltip();
 
+    $("#profile-image").click(function(){
+        $("#upload-image").click();
+    });
     function toasterOptions() {
         toastr.options = {
             "closeButton": false,

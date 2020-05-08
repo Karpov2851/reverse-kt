@@ -43,6 +43,12 @@ public class UserProfile extends BaseEntity{
     @Column(name = "USER_ID",length = 50)
     private String userId;
 
+    @Column(name = "USER_PROFILE_IMAGE_PATH")
+    private String userProfileImagePath;
+
+    @Column(name = "USER_PROFILE_IMAGE_REF_CD",length = 300)
+    private String userProfileImageRefCd;
+
     @Column(name = "PASSWORD")
     private String password;
 }

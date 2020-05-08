@@ -15,9 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by vikas on 21-04-2020.
@@ -47,10 +45,9 @@ public class LoginProcessor {
                 if(userRole!=null){
                     userProfile = UserProfile.builder().userId(registrationModelView.getUserName()).userRole(userRole)
                             .password(mainCommonUtil.convertToBecrypt(registrationModelView.getPwd())).companyMstr(userCompany).build();
-                    EmployeeMstr employeeMstr = EmployeeMstr.builder().companyMstr(userCompany).employeeEmail(registrationModelView.getEmail())
-                            .employeeFirstName(registrationModelView.getFirstName()).employeeLastName(registrationModelView.getLastName()).build();
-
                     userService.createUserProfile(userProfile,true);
+                    EmployeeMstr employeeMstr = EmployeeMstr.builder().companyMstr(userCompany).userProfile(userProfile).employeeEmail(registrationModelView.getEmail())
+                            .employeeFirstName(registrationModelView.getFirstName()).employeeLastName(registrationModelView.getLastName()).build();
                     employeeService.createEmployeeRecord(employeeMstr,true);
                     registrationModelView.setShowSuccess(true);
                     registrationModelView.setMessage("User created successfully");
@@ -66,11 +63,9 @@ public class LoginProcessor {
 
     public RegistrationModelView generateRegistrationModelView() throws Exception{
         RegistrationModelView registrationModelView = null;
-        List<CompanyMstr> fetchAllActiveCompanies = companyService.fetchAllActiveCompanies();
-        if(fetchAllActiveCompanies!=null && fetchAllActiveCompanies.size() >0){
+        Map<String,String> companyData = companyService.fetchMapOfCompanyCdAndCompanyName();
+        if(companyData!=null && companyData.size() >0){
             registrationModelView = new RegistrationModelView();
-            Map<String,Object> companyData =  fetchAllActiveCompanies.stream().collect(
-                    Collectors.toMap(CompanyMstr::getCompanyCd, CompanyMstr::getCompanyName));
             registrationModelView.setCompanyDropDown(companyData);
         }
         return registrationModelView;

@@ -13,6 +13,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by vikas on 22-04-2020.
@@ -28,6 +29,10 @@ public class EmployeeServiceTest {
 
     @Captor
     private ArgumentCaptor<EmployeeMstr> captorBean;
+
+    @Captor
+    private ArgumentCaptor<Integer> captorInteger;
+
 
     @Before
     public void init() {
@@ -47,6 +52,21 @@ public class EmployeeServiceTest {
         //then
         employeeService.createEmployeeRecord(employeeMstr,true);
         assertThat(employeeMstr.getEmployeeFirstName(),equalTo(captorBean.getValue().getEmployeeFirstName()));
+    }
 
+    @Test
+    public void fetchEmployeeForUserProfileSeqTest() throws Exception{
+        //given
+        EmployeeMstr expected =
+                EmployeeMstr.builder().employeeFirstName("firstname").employeeLastName("lastname").
+                        companyMstr(CompanyMstr.builder().companyMstrSeq(1).build()).build();
+
+        //when
+        when(employeeMstrDao.fetchEmployeeMstrForUserProfile(captorInteger.capture())).thenReturn(expected);
+
+        //then
+        EmployeeMstr actual = employeeService.fetchEmployeeForUserProfileSeq(20);
+        assertThat(captorInteger.getValue(),equalTo(20));
+        assertThat(actual.getEmployeeFirstName(),equalTo(expected.getEmployeeFirstName()));
     }
 }

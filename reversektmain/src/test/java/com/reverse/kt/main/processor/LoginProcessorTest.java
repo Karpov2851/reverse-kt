@@ -18,8 +18,8 @@ import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasKey;
@@ -132,10 +132,10 @@ public class LoginProcessorTest {
     @Test
     public void generateRegistrationModelViewShouldReturnNull() throws Exception{
         //given
-        List<CompanyMstr> allCompanies = null;
+        Map<String,String> companyMap = null;
 
         //when
-        when(companyService.fetchAllActiveCompanies()).thenReturn(allCompanies);
+        when(companyService.fetchMapOfCompanyCdAndCompanyName()).thenReturn(companyMap);
 
         //then
         RegistrationModelView rv = loginProcessor.generateRegistrationModelView();
@@ -146,18 +146,24 @@ public class LoginProcessorTest {
     @Test
     public void generateRegistrationModelViewShouldSucceed() throws Exception{
         //given
-        List<CompanyMstr> allCompanies = Arrays.asList(CompanyMstr.builder().companyCd("TEST_ONE_CD").companyName("TEST_COMP").build(),
-                CompanyMstr.builder().companyCd("TEST_TWO_CD").companyName("TEST_COMP_TWO").build(),
-                CompanyMstr.builder().companyCd("TEST_THREE_CD").companyName("TEST_COMP_THREE").build());
+        Map<String,String> companyMap = getCompanyMapData();
 
         //when
-        when(companyService.fetchAllActiveCompanies()).thenReturn(allCompanies);
+        when(companyService.fetchMapOfCompanyCdAndCompanyName()).thenReturn(companyMap);
 
         //then
         RegistrationModelView rv = loginProcessor.generateRegistrationModelView();
         assertNotNull(rv);
         assertThat(rv.getCompanyDropDown(),hasKey("TEST_TWO_CD"));
 
+    }
+
+    private Map<String,String> getCompanyMapData(){
+        return new HashMap<String,String>(){{
+            put("TEST_ONE_CD","TEST_COMP");
+            put("TEST_TWO_CD","TEST_COMP_TWO");
+            put("TEST_THREE_CD","TEST_COMP_THREE");
+        }};
     }
 
 

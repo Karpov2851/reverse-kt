@@ -64,10 +64,19 @@ public class WebSecurityTest {
 
     @WithMockUser(username = "user_id",roles = {"EMPLOYEE"})
     @Test
-    public void serverAuthenticatedCalloutShouldRedirect() throws Exception{
+    public void serverAuthenticatedCalloutShouldBeForbidden() throws Exception{
         mockMvc.perform(get("/server-authenticated").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isForbidden());
     }
+
+    @WithMockUser(username = "user_id",roles = {"EMPLOYEE"})
+    @Test
+    public void loadProfileApplicationControllerShouldBeForbidden() throws Exception{
+        mockMvc.perform(get("/load-profile").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isForbidden());
+    }
+
+
 
     @Test
     public void loginShouldShouldSucceedWithRedirection() throws Exception{
@@ -89,4 +98,6 @@ public class WebSecurityTest {
                 .andExpect(model().attribute("regVO",hasProperty("showSuccess",is(true))))
                 .andExpect(model().attribute("regVO",hasProperty("message",is("User logged out successfully"))));
     }
+
+
 }
