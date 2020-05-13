@@ -1,11 +1,14 @@
 package com.reverse.kt.main.controller;
 
+import com.reverse.kt.core.constants.ApplicationConstants;
 import com.reverse.kt.core.ui.RegistrationModelView;
 import com.reverse.kt.main.processor.LoginProcessor;
+import com.reverse.kt.main.security.CustomUser;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by vikas on 16-04-2020.
@@ -80,11 +84,13 @@ public class LoginController {
         return loadRegister(m,fl,registrationModelView);
     }
 
-    /*@GetMapping(value="/home")
+    @GetMapping(value="/home")
     @PreAuthorize("hasAnyRole('ROLE_EMPLOYEE','ROLE_ADMIN','ROLE_PROJECT_MANAGER','ROLE_TECH_ARCH','ROLE_SCRUM_MSTR','ROLE_DIRECTOR')")
-    public String home(){
-        return "home";
-    }*/
+    public String home(HttpSession httpSession, Authentication authentication){
+        CustomUser customUser = (CustomUser)authentication.getPrincipal();
+        httpSession.setAttribute(ApplicationConstants.USER_PROFILE_SEQ,customUser.getUserProfileSeq());
+        return "redirect:load-history";
+    }
 
     @GetMapping(value="/denied")
     public String denied(){

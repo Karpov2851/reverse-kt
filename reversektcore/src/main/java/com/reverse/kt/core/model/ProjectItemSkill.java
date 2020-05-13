@@ -1,5 +1,6 @@
 package com.reverse.kt.core.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class ProjectItemSkill extends BaseEntity{
 
     @Id
@@ -23,9 +25,9 @@ public class ProjectItemSkill extends BaseEntity{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="PROJECT_ITEM_SEQ")
-    private ProjectItem projectItem;
+    @EqualsAndHashCode.Exclude private ProjectItem projectItem;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="SKILL_MSTR_SEQ")
-    private SkillMstr skillMstr;
+    @EqualsAndHashCode.Exclude private SkillMstr skillMstr;
 }

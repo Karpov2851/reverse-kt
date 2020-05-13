@@ -42,7 +42,7 @@ public class EmployeeMstr extends BaseEntity{
     @JoinColumn(name = "COMPANY_MSTR_SEQ")
     private CompanyMstr companyMstr;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_PROFILE_SEQ")
     private UserProfile userProfile;
 
@@ -53,6 +53,10 @@ public class EmployeeMstr extends BaseEntity{
     @OneToOne
     @JoinColumn(name = "PROJECT_ITEM_SEQ")
     private ProjectItem projectItem;
+
+    @OneToOne
+    @JoinColumn(name = "DESIGNATION_MSTR_SEQ")
+    private DesignationMstr designationMstr;
 
     @Column(name = "EMPLOYEE_EMAIL",length = 50)
     private String employeeEmail;

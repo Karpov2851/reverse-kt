@@ -40,6 +40,9 @@ public class UserServiceTest {
     private ArgumentCaptor<String> captorString;
 
     @Captor
+    private ArgumentCaptor<Integer> captorInteger;
+
+    @Captor
     private ArgumentCaptor<UserRoleIdentifier> captorRoleIdentifier;
 
     @Captor
@@ -54,17 +57,20 @@ public class UserServiceTest {
     public void loadUserByUsernameTestShouldSucceed() throws Exception{
         //given
         UserProfile userProfile = UserProfile.builder().password("pwd").userId("username").userRole(UserRole.builder().userRoleCd("ROLE_TEST").build()).build();
-        CustomUser expected = CustomUser.builder().password("pwd").username("username").build();
+        userProfile.setUserProfileSeq(1);
+        CustomUser expected = CustomUser.builder().userProfileSeq(userProfile.getUserProfileSeq()).password("pwd").username("username").build();
 
         //when
         when(userProfileDao.fetchUserProfileByUserId(captorString.capture())).thenReturn(userProfile);
 
         //then
         UserDetails userDetails = userService.loadUserByUsername("username");
+        CustomUser actualCustomUser = (CustomUser)userDetails;
         assertNotNull(userDetails);
         assertTrue(userDetails instanceof CustomUser);
         assertThat(userDetails.getPassword(),equalTo(expected.getPassword()));
         assertThat(userDetails.getUsername(),equalTo(expected.getUsername()));
+        assertThat(actualCustomUser.getUserProfileSeq(),equalTo(userProfile.getUserProfileSeq()));
     }
 
 
@@ -95,6 +101,34 @@ public class UserServiceTest {
         userService.createUserProfile(userProfile,true);
         assertThat(userProfile.getUserId(),equalTo(captorBean.getValue().getUserId()));
 
+    }
+
+    @Test
+    public void fetchUserForRoleAndCompanyTest() throws Exception{
+        //given
+        UserProfile expected = UserProfile.builder().password("pwd").userId("username").userRole(UserRole.builder().userRoleCd("ROLE_TEST").build()).build();
+
+        //when
+        when(userProfileDao.fetchUserProfileByUserId(captorString.capture())).thenReturn(expected);
+
+        //then
+        UserProfile actual = userService.fetchUserProfileByUserId("username");
+        assertThat(captorString.getValue(),equalTo("username"));
+        assertThat(actual.getUserRole().getUserRoleCd(),equalTo("ROLE_TEST"));
+    }
+
+    @Test
+    public void fetchUserByProfileSeqTest() throws Exception{
+        //given
+        UserProfile expected = UserProfile.builder().password("pwd").userId("username").userRole(UserRole.builder().userRoleCd("ROLE_TEST").build()).build();
+
+        //when
+        when(userProfileDao.findById(captorInteger.capture())).thenReturn(expected);
+
+        //then
+        UserProfile actual = userService.fetchUserByProfileSeq(1);
+        assertThat(captorInteger.getValue(),equalTo(1));
+        assertThat(actual.getUserRole().getUserRoleCd(),equalTo("ROLE_TEST"));
     }
 
 }

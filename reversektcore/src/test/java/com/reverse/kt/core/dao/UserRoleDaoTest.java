@@ -6,6 +6,7 @@ import com.reverse.kt.core.model.CompanyMstr;
 import com.reverse.kt.core.model.UserRole;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -22,6 +23,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = CoreTestConfig.class)
 @Sql(scripts={"classpath:db/master_data.sql"})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class UserRoleDaoTest extends BaseTestDao<UserRole,UserRoleDao,Integer>{
 
     @Inject

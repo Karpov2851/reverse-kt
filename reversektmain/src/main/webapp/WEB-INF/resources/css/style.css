@@ -3456,7 +3456,11 @@ input[type="button"].btn-block {
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
-
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
 .navbar-nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3888,6 +3892,29 @@ input[type="button"].btn-block {
     margin-right: 15px;
     margin-bottom: 0;
     margin-left: 15px; } }
+
+
+/* #profile-image{
+  opacity: 0.5;
+  filter: alpha(opacity=40);
+}
+
+#profile-image:hover{
+  opacity: 0.5;
+  filter: alpha(opacity=40);
+} */
+
+img {
+  opacity: 1.0;
+  filter: alpha(opacity=100);
+}
+
+img:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=40);
+
+}
+
 
 .card-group {
   display: -webkit-box;

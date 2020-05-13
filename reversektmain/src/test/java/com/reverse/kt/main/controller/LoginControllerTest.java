@@ -62,7 +62,7 @@ public class LoginControllerTest {
 
     private RegistrationModelView generateModelView(){
         RegistrationModelView rv = new RegistrationModelView();
-        rv.setCompanyDropDown(new HashMap<String,Object> (){{
+        rv.setCompanyDropDown(new HashMap<String,String> (){{
             put("company1","company_one_name");
             put("company2","company_two_name");
         }});

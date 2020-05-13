@@ -46,21 +46,27 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
         this.root = this.criteriaQuery.from(persistanceClass);
     }
 
-
+    protected EntityManager getEntityManager() {
+        return entityManager;
+    }
 
     public T findById(Integer id){
         return (T)entityManager.find(this.persistanceClass,id);
     }
 
-    public CriteriaBuilder getCriteriaBuilder() {
+    protected CriteriaBuilder getCriteriaBuilder() {
         return criteriaBuilder;
     }
 
-    public Root<T> getRoot() {
+    protected Root<T> getRoot() {
         return root;
     }
 
-    public CriteriaQuery<T> getCriteriaQuery() {
+    protected void setRoot(Root<T> root) {
+        this.root = root;
+    }
+
+    protected CriteriaQuery<T> getCriteriaQuery() {
         return criteriaQuery;
     }
 
@@ -75,7 +81,7 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
         }
     }
 
-    public List<T> findListOfEntireRecordsBasedOnCriteria(Predicate[] predicate){
+    protected List<T> findListOfEntireRecordsBasedOnCriteria(Predicate[] predicate){
         this.criteriaQuery.select(this.root);
         criteriaQuery.where(predicate);
         TypedQuery<T> queryBasedOnPredicate = entityManager.createQuery(criteriaQuery);
@@ -87,6 +93,8 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
         final Date d = new Date();
         bean.setCreatedDate(d);
         bean.setUpdatedDate(d);
+        bean.setCreatedBy(0);
+        bean.setUpdatedBy(0);
     }
 
     private void initUpdate(final T bean) {

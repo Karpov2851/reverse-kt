@@ -22,6 +22,8 @@ public class CustomUser implements UserDetails{
 
     private Collection<? extends GrantedAuthority> authorities;
 
+    private int userProfileSeq;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
@@ -55,5 +57,13 @@ public class CustomUser implements UserDetails{
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public int getUserProfileSeq() {
+        return userProfileSeq;
+    }
+
+    public void setUserProfileSeq(int userProfileSeq) {
+        this.userProfileSeq = userProfileSeq;
     }
 }

@@ -18,6 +18,6 @@
             username="root"
             password="Letsbounce123"
             driverClassName="com.mysql.jdbc.Driver"
-            url="jdbc:mysql://localhost:3306/kt-session"
+            url="jdbc:mysql://localhost:3306/kt_session"
     />
 </Context>

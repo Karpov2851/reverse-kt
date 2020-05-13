@@ -32,6 +32,10 @@ public class RegistrationModelView extends BaseModelView{
 
     private String projectItemSelected;
 
+    private String profileImageFilePath;
+
+    private String designation;
+
     @Builder
     public RegistrationModelView(String firstName,String lastName,String userName,String email,String pwd,String companySelected,boolean showError,boolean showSuccess,String showSection,String message){
         super(showError,showSuccess,showSection,message);
@@ -49,13 +53,19 @@ public class RegistrationModelView extends BaseModelView{
     }
 
     //Drodown values
-    private Map<String,Object> companyDropDown;
+    private Map<String,String> companyDropDown;
+
+    private Map<Integer,String> designationDropDown;
 
     private Map<String,Object> businessUnitDropDown;
 
-    private Map<String,Object> projectDropDown;
+    private Map<Integer,Object> projectDropDown;
 
-    private Map<String,Object> projectItemDropDown;
+    private Map<Integer,Object> projectItemDropDown;
+
+
+
+
 
     //TODO need to think about a cleaner solution. Just making it work now.
     public static void generateLoginModel(RegistrationModelView r,String error,String logout){

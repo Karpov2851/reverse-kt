@@ -1,10 +1,9 @@
 package com.reverse.kt.core.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -15,7 +14,16 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class ProjectItem extends BaseEntity{
+
+    @Builder
+    public ProjectItem(Integer projectItemSeq, String projectItemDesc,
+                   Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+        super(createdBy,updatedBy,createdDate,updatedDate,'A');
+        this.projectItemSeq = projectItemSeq;
+        this.projectItemDesc = projectItemDesc;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +32,12 @@ public class ProjectItem extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "PROJECT_SEQ")
-    private Project project;
+    @EqualsAndHashCode.Exclude private Project project;
 
     @OneToMany(
             cascade = CascadeType.ALL,orphanRemoval = true,mappedBy = "projectItem"
     )
-    private Set<ProjectItemSkill> projectItemSkills;
+    @EqualsAndHashCode.Exclude private Set<ProjectItemSkill> projectItemSkills;
 
     @Column(name = "PROJECT_ITEM_DESC",length = 50)
     private String projectItemDesc;

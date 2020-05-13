@@ -4,12 +4,12 @@ import com.reverse.kt.core.config.CoreTestConfig;
 import com.reverse.kt.core.model.CompanyMstr;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
-
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = CoreTestConfig.class)
-
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class CompanyDaoTest extends BaseTestDao<CompanyMstr,CompanyDao,Integer> {
 
     @Inject
@@ -82,6 +82,7 @@ public class CompanyDaoTest extends BaseTestDao<CompanyMstr,CompanyDao,Integer> 
         assertThat(companyRecord.getBusinessUnits(), hasSize(3));
         assertThat(companyRecord.getProjects(), hasSize(6));
         assertThat(companyRecord.getSkillMstrs(), hasSize(6));
+        assertThat(companyRecord.getDesignationMstrs(), hasSize(4));
     }
 
     @Override

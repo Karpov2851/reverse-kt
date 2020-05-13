@@ -1,10 +1,9 @@
 package com.reverse.kt.core.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by vikas on 02-04-2020.
@@ -14,7 +13,18 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class DesignationMstr extends BaseEntity{
+
+    @Builder
+    public DesignationMstr(Integer designationMstrSeq,CompanyMstr companyMstr,String designatioName,Integer priority,
+                        Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+        super(createdBy,updatedBy,createdDate,updatedDate,'A');
+        this.designationMstrSeq = designationMstrSeq;
+        this.companyMstr = companyMstr;
+        this.designatioName = designatioName;
+        this.priority = priority;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

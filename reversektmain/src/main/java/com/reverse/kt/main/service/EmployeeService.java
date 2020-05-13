@@ -19,4 +19,8 @@ public class EmployeeService {
     public void createEmployeeRecord(EmployeeMstr e,boolean isInsert) throws Exception{
         employeeMstrDao.saveOrUpdateEntity(e,isInsert);
     }
+
+    public EmployeeMstr fetchEmployeeForUserProfileSeq(int userProfileSeq) throws Exception{
+        return employeeMstrDao.fetchEmployeeMstrForUserProfile(userProfileSeq);
+    }
 }
