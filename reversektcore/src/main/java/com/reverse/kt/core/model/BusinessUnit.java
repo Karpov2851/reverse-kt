@@ -17,9 +17,10 @@ import java.util.Date;
 public class BusinessUnit extends BaseEntity{
 
     @Builder
-    public BusinessUnit(CompanyMstr companyMstr,String businessUnitName,String businessCd,String businessDesc,
+    public BusinessUnit(Integer businessUnitSeq,CompanyMstr companyMstr,String businessUnitName,String businessCd,String businessDesc,
                         Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
+        this.businessUnitSeq = businessUnitSeq;
         this.companyMstr = companyMstr;
         this.businessUnitName = businessUnitName;
         this.businessCd = businessCd;

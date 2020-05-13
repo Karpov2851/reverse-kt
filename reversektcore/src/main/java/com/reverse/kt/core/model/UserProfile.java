@@ -19,12 +19,13 @@ import java.util.Date;
 public class UserProfile extends BaseEntity{
 
     @Builder
-    public UserProfile(UserRole userRole,CompanyMstr companyMstr,String userId,String password,Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public UserProfile(UserRole userRole,CompanyMstr companyMstr,String userProfileImagePath,String userId,String password,Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.userRole = userRole;
         this.companyMstr = companyMstr;
         this.userId = userId;
         this.password = password;
+        this.userProfileImagePath = userProfileImagePath;
     }
 
     @Id

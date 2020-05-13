@@ -41,13 +41,15 @@ public class CompanyMstr extends BaseEntity{
     private String companyCd;
 
     @OneToMany(mappedBy = "companyMstr",fetch = FetchType.EAGER)
-    private Set<BusinessUnit> businessUnits;
+    private Set<BusinessUnit> businessUnits = new HashSet<>();
 
     @OneToMany(mappedBy = "companyMstr",fetch = FetchType.EAGER)
-    private Set<SkillMstr> skillMstrs;
+    private Set<SkillMstr> skillMstrs = new HashSet<>();
 
     @OneToMany(mappedBy = "companyMstr",fetch = FetchType.EAGER)
     private Set<Project> projects = new HashSet<>();
 
+    @OneToMany(mappedBy = "companyMstr",fetch = FetchType.EAGER)
+    private Set<DesignationMstr> designationMstrs = new HashSet<>();
 
 }

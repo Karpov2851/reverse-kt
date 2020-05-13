@@ -89,7 +89,7 @@ public class LoginController {
     public String home(HttpSession httpSession, Authentication authentication){
         CustomUser customUser = (CustomUser)authentication.getPrincipal();
         httpSession.setAttribute(ApplicationConstants.USER_PROFILE_SEQ,customUser.getUserProfileSeq());
-        return "redirect:history";
+        return "redirect:load-history";
     }
 
     @GetMapping(value="/denied")

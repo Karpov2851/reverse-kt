@@ -46,7 +46,7 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
         this.root = this.criteriaQuery.from(persistanceClass);
     }
 
-    public EntityManager getEntityManager() {
+    protected EntityManager getEntityManager() {
         return entityManager;
     }
 
@@ -54,15 +54,19 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
         return (T)entityManager.find(this.persistanceClass,id);
     }
 
-    public CriteriaBuilder getCriteriaBuilder() {
+    protected CriteriaBuilder getCriteriaBuilder() {
         return criteriaBuilder;
     }
 
-    public Root<T> getRoot() {
+    protected Root<T> getRoot() {
         return root;
     }
 
-    public CriteriaQuery<T> getCriteriaQuery() {
+    protected void setRoot(Root<T> root) {
+        this.root = root;
+    }
+
+    protected CriteriaQuery<T> getCriteriaQuery() {
         return criteriaQuery;
     }
 
@@ -77,7 +81,7 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
         }
     }
 
-    public List<T> findListOfEntireRecordsBasedOnCriteria(Predicate[] predicate){
+    protected List<T> findListOfEntireRecordsBasedOnCriteria(Predicate[] predicate){
         this.criteriaQuery.select(this.root);
         criteriaQuery.where(predicate);
         TypedQuery<T> queryBasedOnPredicate = entityManager.createQuery(criteriaQuery);

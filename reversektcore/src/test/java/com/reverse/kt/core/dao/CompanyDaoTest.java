@@ -82,6 +82,7 @@ public class CompanyDaoTest extends BaseTestDao<CompanyMstr,CompanyDao,Integer> 
         assertThat(companyRecord.getBusinessUnits(), hasSize(3));
         assertThat(companyRecord.getProjects(), hasSize(6));
         assertThat(companyRecord.getSkillMstrs(), hasSize(6));
+        assertThat(companyRecord.getDesignationMstrs(), hasSize(4));
     }
 
     @Override

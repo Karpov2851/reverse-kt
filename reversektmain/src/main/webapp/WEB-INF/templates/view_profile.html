@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <body>
 <div class="wrapper d-flex align-items-stretch">
@@ -25,86 +26,110 @@
         <h1>View Profile</h1>
         <div class="container-fluid">
             <div class="row">
-                <form class="form" id="view-profile-form" role="form" th:action="@{/save-user}" th:object="${regVO}" method="post" autocomplete="off">
+                <form class="form" id="view-profile-form" role="form" th:action="@{/save-profile}" th:object="${regVO}"
+                      method="post" autocomplete="off">
+                    <div class="alert" th:classappend="${regVO.showError == true ? 'alert-danger' : 'alert-success'}" th:if="${not #strings.isEmpty(regVO.message)}">
+                        <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></span>
+                        <strong th:text="${regVO.message}"></strong>
+                    </div>
 
-                    <div th:if="${not #strings.isEmpty(regVO.profileImageFilePath) && regVO.profileImageFilePath != null}" class="form-group row">
+                    <div class="form-group row">
                         <div class="card" style="border: none;">
-                            <img data-toggle="tooltip" title="Upload image" id="profile-image" src="images/img-1.jpg"  alt="Avatar" style="width:20%">
-                            <input type="file" id="upload-image" style="display: none" />
+                            <img data-toggle="tooltip" title="Upload image" id="profile-image"
+                                 th:src="${(not #strings.isEmpty(regVO.profileImageFilePath) && regVO.profileImageFilePath != null) ? regVO.profileImageFilePath
+                                 : '/reverse-kt-main/resources/images/shutter.png'}" alt="Avatar" style="width:20%">
+
+                            <input type="file" id="upload-image" style="display: none"/>
                         </div>
 
                     </div>
 
-                    <div th:if="${#strings.isEmpty(regVO.profileImageFilePath) ||  regVO.profileImageFilePath == null}"  class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Upload Pofile Image</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" name="profile-image" type="file" placeholder="Upload File">
-                        </div>
-                    </div>
+
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">First name</label>
                         <div class="col-lg-9">
-                            <input class="form-control" name="f-name" type="text" th:field="${regVO.firstName}" placeholder="Enter First Name">
+                            <input class="form-control" name="f-name" type="text" th:field="${regVO.firstName}"
+                                   placeholder="Enter First Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                         <div class="col-lg-9">
-                            <input class="form-control" name="l-name" type="text"  th:field="${regVO.lastName}" placeholder="Enter Last Name">
+                            <input class="form-control" name="l-name" type="text" th:field="${regVO.lastName}"
+                                   placeholder="Enter Last Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Email</label>
                         <div class="col-lg-9">
-                            <input class="form-control" name="email" required="required" type="email" th:field="${regVO.email}" placeholder="Enter Email">
+                            <input class="form-control" name="email" required="required" type="email"
+                                   th:field="${regVO.email}" placeholder="Enter Email">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Company</label>
+                        <label class="col-lg-3 col-form-label form-control-label">Username</label>
                         <div class="col-lg-9">
-                            <select id="company" name="company" required="required" class="form-control"  th:field="${regVO.companySelected}">
-                                <option value="">----Select----</option>
-                                <option th:selected="${#strings.equals(entry.key, regVO.companySelected)}" th:each="entry : ${regVO.companyDropDown.entrySet()}" th:value="${entry.key}" th:text="${entry.value}">
-                                </option>
-                            </select>
+                            <input class="form-control" name="uname" required="required" type="text"
+                                   th:field="${regVO.userName}" placeholder="Enter User Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Business Unit</label>
                         <div class="col-lg-9">
-                            <select id="business_unit" class="form-control">
+                            <select id="business_unit" name="business_unit" required="required"
+                                    class="form-control info-dropdown" th:field="${regVO.businessUnitSelected}">
 
+                                <option th:each="row : ${regVO.businessUnitDropDown}"
+                                        th:selected="${#strings.equals(row.value, regVO.businessUnitSelected)}"
+                                        th:value="${row.key}" th:text="${row.value}">
+                                </option>
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Designation</label>
+                        <div class="col-lg-9">
+                            <select id="designation" name="designation" required="required"
+                                    class="form-control info-dropdown" th:field="${regVO.designation}">
+                                <option th:each="row : ${regVO.designationDropDown}"
+                                        th:selected="${#strings.equals(row.value, regVO.designation)}"
+                                        th:value="${row.key}" th:text="${row.value}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="projectSelected" th:field="${regVO.projectSelected}">
+                    <input type="hidden" id="projectItemSelected" th:field="${regVO.projectItemSelected}">
+
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Project</label>
                         <div class="col-lg-9">
-                            <select id="project" class="form-control" size="0">
-
+                            <select id="project" name="project" required="required"
+                                    class="form-control deps info-dropdown project-related">
+                                <option th:if="${regVO.projectDropDown !=null}" th:each="row : ${regVO.projectDropDown}"
+                                        th:selected="${#strings.equals(row.value, regVO.projectSelected)}"
+                                        th:value="${row.key}" th:text="${row.value}">
+                                </option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Project Item</label>
                         <div class="col-lg-9">
-                            <select id="project_item" class="form-control" size="0">
-
+                            <select id="project_item" name="project_item" required="required"
+                                    class="form-control deps info-dropdown project-related">
+                                <option th:if="${regVO.projectItemDropDown !=null}"
+                                        th:selected="${#strings.equals(row.value, regVO.projectItemSelected)}"
+                                        th:each="row : ${regVO.projectItemDropDown}" th:value="${row.key}"
+                                        th:text="${row.value}">
+                                </option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" name="designation" required="required" type="text" th:field="${regVO.designation}" placeholder="Enter Designation">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" name="uname" required="required" type="text" th:field="${regVO.userName}" placeholder="Enter User Name">
-                        </div>
-                    </div>
+
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label"></label>
                         <div class="col-lg-9">

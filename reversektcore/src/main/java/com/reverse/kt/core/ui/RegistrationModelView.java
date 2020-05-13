@@ -55,11 +55,15 @@ public class RegistrationModelView extends BaseModelView{
     //Drodown values
     private Map<String,String> companyDropDown;
 
+    private Map<Integer,String> designationDropDown;
+
     private Map<String,Object> businessUnitDropDown;
 
-    private Map<String,Object> projectDropDown;
+    private Map<Integer,Object> projectDropDown;
 
-    private Map<String,Object> projectItemDropDown;
+    private Map<Integer,Object> projectItemDropDown;
+
+
 
 
 

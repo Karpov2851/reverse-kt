@@ -1,13 +1,15 @@
 <html xmlns:th="https://thymeleaf.org">
 <div th:fragment="footer">
-    <script data-main="resources/js/app" th:src="@{/resources/js/vendor/require.js}"></script>
-    <script type="text/javascript">
+    <script th:src="@{/resources/js/vendor/require.js}"></script>
+    <script th:src="@{/resources/js/app.js}"></script>
+    <script th:inline="javascript" type="text/javascript">
         // Load the main config file before proceeding
         require(["app","jquery"], function() {
             var jsName = 'app/'+$("#no-js").val();
-            require(['app/main',jsName], function(){
-
+            require(['app/main','app/util',jsName], function(){
             }) ;
+        },function (err) {
+            console.log(err);
         });
     </script>
 </div>
