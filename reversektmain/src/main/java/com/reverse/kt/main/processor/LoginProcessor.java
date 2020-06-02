@@ -41,7 +41,7 @@ public class LoginProcessor {
                 registrationModelView.setMessage("User already exists with this username");
             }else{
                 CompanyMstr userCompany = companyService.fetchCompanyByCompanyCd(registrationModelView.getCompanySelected());
-                UserRole userRole = userService.fetchUserForRoleAndCompany(UserRoleIdentifier.EMPLOYEE,userCompany.getCompanyMstrSeq());
+                UserRole userRole = userService.fetchUserForRoleAndCompany(UserRoleIdentifier.ROLE_EMPLOYEE,userCompany.getCompanyMstrSeq());
                 if(userRole!=null){
                     userProfile = UserProfile.builder().userId(registrationModelView.getUserName()).userRole(userRole)
                             .password(mainCommonUtil.convertToBecrypt(registrationModelView.getPwd())).companyMstr(userCompany).build();

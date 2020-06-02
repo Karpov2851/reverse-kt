@@ -86,7 +86,7 @@ public class LoginProcessorTest {
 
         //when
         when(companyService.fetchCompanyByCompanyCd(anyString())).thenReturn(existingCompany);
-        when(userService.fetchUserForRoleAndCompany(UserRoleIdentifier.EMPLOYEE,existingCompany.getCompanyMstrSeq())).thenReturn(null);
+        when(userService.fetchUserForRoleAndCompany(UserRoleIdentifier.ROLE_EMPLOYEE,existingCompany.getCompanyMstrSeq())).thenReturn(null);
         loginProcessor.registerUser(rv);
     }
 
@@ -119,7 +119,7 @@ public class LoginProcessorTest {
 
         when(userService.fetchUserProfileByUserId(anyString())).thenReturn(null);
         when(companyService.fetchCompanyByCompanyCd(anyString())).thenReturn(existingCompany);
-        when(userService.fetchUserForRoleAndCompany(UserRoleIdentifier.EMPLOYEE,existingCompany.getCompanyMstrSeq())).thenReturn(userRole);
+        when(userService.fetchUserForRoleAndCompany(UserRoleIdentifier.ROLE_EMPLOYEE,existingCompany.getCompanyMstrSeq())).thenReturn(userRole);
         when(mainCommonUtil.convertToBecrypt(rv.getPwd())).thenReturn("encryptedpwd");
 
         //then

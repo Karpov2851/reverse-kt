@@ -35,7 +35,7 @@ public class UserRoleDaoTest extends BaseTestDao<UserRole,UserRoleDao,Integer>{
         UserRole expectedResult = getSingleEntity();
 
         //when
-        UserRole actualResult = userRoleDao.fetchUserForRoleAndCompany(UserRoleIdentifier.PROJECT_MANAGER,1);
+        UserRole actualResult = userRoleDao.fetchUserForRoleAndCompany(UserRoleIdentifier.ROLE_PROJECT_MANAGER,1);
 
         //then
         assertNotNull(actualResult);
@@ -44,7 +44,7 @@ public class UserRoleDaoTest extends BaseTestDao<UserRole,UserRoleDao,Integer>{
 
     @Override
     protected UserRole getSingleEntity() {
-        return UserRole.builder().userRoleCd(UserRoleIdentifier.PROJECT_MANAGER.name()).companyMstr(CompanyMstr.builder().companyMstrSeq(1).build()).build();
+        return UserRole.builder().userRoleCd(UserRoleIdentifier.ROLE_PROJECT_MANAGER.name()).companyMstr(CompanyMstr.builder().companyMstrSeq(1).build()).build();
     }
 
     @Override
