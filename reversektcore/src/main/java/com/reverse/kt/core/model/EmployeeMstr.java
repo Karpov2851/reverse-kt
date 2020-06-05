@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by vikas on 02-04-2020.
@@ -19,9 +19,9 @@ import java.util.Date;
 public class EmployeeMstr extends BaseEntity{
 
     @Builder
-    public EmployeeMstr(CompanyMstr companyMstr,UserProfile userProfile,BusinessUnit businessUnit,ProjectItem projectItem,
-                        String employeeEmail,String employeeFirstName,String employeeLastName,
-                        Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public EmployeeMstr(CompanyMstr companyMstr, UserProfile userProfile, BusinessUnit businessUnit, ProjectItem projectItem,
+                        String employeeEmail, String employeeFirstName, String employeeLastName,
+                        Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.companyMstr = companyMstr;
         this.userProfile = userProfile;

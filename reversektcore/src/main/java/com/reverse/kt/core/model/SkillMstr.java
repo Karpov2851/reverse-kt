@@ -3,7 +3,7 @@ package com.reverse.kt.core.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,8 +19,8 @@ import java.util.Set;
 public class SkillMstr extends BaseEntity{
 
     @Builder
-    public SkillMstr(Integer skillMstrSeq,CompanyMstr companyMstr,String skillDesc,String skillDomain,
-                       Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public SkillMstr(Integer skillMstrSeq, CompanyMstr companyMstr, String skillDesc, String skillDomain,
+                     Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.skillMstrSeq = skillMstrSeq;
         this.companyMstr = companyMstr;

@@ -3,7 +3,7 @@ package com.reverse.kt.core.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by vikas on 02-04-2020.
@@ -17,8 +17,8 @@ import java.util.Date;
 public class BusinessUnit extends BaseEntity{
 
     @Builder
-    public BusinessUnit(Integer businessUnitSeq,CompanyMstr companyMstr,String businessUnitName,String businessCd,String businessDesc,
-                        Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public BusinessUnit(Integer businessUnitSeq, CompanyMstr companyMstr, String businessUnitName, String businessCd, String businessDesc,
+                        Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.businessUnitSeq = businessUnitSeq;
         this.companyMstr = companyMstr;

@@ -3,7 +3,7 @@ package com.reverse.kt.core.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by vikas on 02-04-2020.
@@ -17,8 +17,8 @@ import java.util.Date;
 public class DesignationMstr extends BaseEntity{
 
     @Builder
-    public DesignationMstr(Integer designationMstrSeq,CompanyMstr companyMstr,String designatioName,Integer priority,
-                        Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public DesignationMstr(Integer designationMstrSeq, CompanyMstr companyMstr, String designatioName, Integer priority,
+                           Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.designationMstrSeq = designationMstrSeq;
         this.companyMstr = companyMstr;

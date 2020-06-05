@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -20,8 +20,8 @@ import java.util.Set;
 public class UserRole extends BaseEntity{
 
     @Builder
-    public UserRole(Integer userRoleSeq,CompanyMstr companyMstr,String userRoleDesc,String userRoleCd,
-                    Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public UserRole(Integer userRoleSeq, CompanyMstr companyMstr, String userRoleDesc, String userRoleCd,
+                    Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.userRoleSeq = userRoleSeq;
         this.companyMstr = companyMstr;
