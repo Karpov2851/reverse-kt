@@ -19,9 +19,10 @@ import java.time.LocalDateTime;
 public class UserProfile extends BaseEntity{
 
     @Builder
-    public UserProfile(UserRole userRole, CompanyMstr companyMstr, String userProfileImagePath, String userId,
+    public UserProfile(Integer userProfileSeq,UserRole userRole, CompanyMstr companyMstr, String userProfileImagePath, String userId,
                        String password, Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
+        this.userProfileSeq = userProfileSeq;
         this.userRole = userRole;
         this.companyMstr = companyMstr;
         this.userId = userId;

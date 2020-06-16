@@ -30,18 +30,18 @@
         <div class="container-fluid">
             <div class="row">
 
-                <div class="col-md-3 mt-5">
+                <div class="col-md-3 mt-5" th:each="historyCard: ${historyList}">
                     <div class="card text-center">
                         <div class="card-header">
 
                         </div>
                         <div class="card-body" id="card">
-                            <h5 class="card-title">Video name</h5>
-                            <p class="card-text">Uploaded video detail description</p>
+                            <h5 class="card-title" th:text="${historyCard.videoName}"></h5>
+                            <p class="card-text" th:text="${historyCard.videoDetails}"></p>
                         </div>
                         <div class="card-footer text-muted">
                             <div class="row">
-                                <a href="#" class="btn btn-primary">View detail</a>
+                                <a th:href="@{/view-session/} + ${historyCard.scheduledSessionSeq}" class="btn btn-primary">View detail</a>
                             </div>
                         </div>
                     </div>

@@ -20,14 +20,15 @@ public class BaseEntity {
 
     @Column(name="CREATED_BY")
     private Integer createdBy = 0;
+
     @Column(name="UPDATED_BY")
     private Integer updatedBy = 0;
 
     @Column(name="CREATED_DATE")
     @Basic
     private LocalDateTime createdDate;
-    @Column(name="UPDATED_DATE")
 
+    @Column(name="UPDATED_DATE")
     @Basic
     private LocalDateTime updatedDate;
 

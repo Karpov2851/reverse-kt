@@ -32,11 +32,11 @@ public class ScheduledSessionUser extends BaseEntity{
     private Integer scheduledSessionUserSeq;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="SCHEDULED_SESSION")
+    @JoinColumn(name="SCHEDULED_SESSION_SEQ")
     private ScheduledSession scheduledSession;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="USER_PROFILE")
+    @JoinColumn(name="USER_PROFILE_SEQ")
     private UserProfile userProfile;
 
 }
