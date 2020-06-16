@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,10 +18,11 @@ import java.util.Set;
 public class ScheduledSession extends BaseEntity{
 
     @Builder
-    public ScheduledSession(ProjectItem projectItem, VideoDetails videoDetails, Date sessionStartDateTime,
-                            Date sessionEndDateTime,
+    public ScheduledSession(Integer scheduledSessionSeq,ProjectItem projectItem, VideoDetails videoDetails, LocalDateTime sessionStartDateTime,
+                            LocalDateTime sessionEndDateTime,
                             Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
+        this.scheduledSessionSeq = scheduledSessionSeq;
         this.projectItem = projectItem;
         this.videoDetails = videoDetails;
         this.sessionStartDateTime = sessionStartDateTime;
@@ -34,7 +35,7 @@ public class ScheduledSession extends BaseEntity{
     private Integer scheduledSessionSeq;
 
     @OneToOne
-    @JoinColumn(name = "PROJECT_ITEM")
+    @JoinColumn(name = "PROJECT_ITEM_SEQ")
     @EqualsAndHashCode.Exclude private ProjectItem projectItem;
 
     @OneToOne
@@ -42,15 +43,15 @@ public class ScheduledSession extends BaseEntity{
     @EqualsAndHashCode.Exclude private VideoDetails videoDetails;
 
     @Column(name="SESSION_START_DATE_TIME")
-    @Temporal(TemporalType.DATE)
-    private Date sessionStartDateTime;
+    @Basic
+    private LocalDateTime sessionStartDateTime;
 
     @Column(name="SESSION_END_DATE_TIME")
-    @Temporal(TemporalType.DATE)
-    private Date sessionEndDateTime;
+    @Basic
+    private LocalDateTime sessionEndDateTime;
 
     @OneToMany(
             cascade = CascadeType.ALL,orphanRemoval = true,mappedBy = "scheduledSession"
     )
-    @EqualsAndHashCode.Exclude private Set<ScheduledSessionUser> scheduledSessionUsers;
+    @EqualsAndHashCode.Exclude private Set<ScheduledSessionUser> scheduledSessionUsers = new HashSet<>();
 }

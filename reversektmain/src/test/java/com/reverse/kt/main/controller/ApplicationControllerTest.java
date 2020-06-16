@@ -1,8 +1,10 @@
 package com.reverse.kt.main.controller;
 
 import com.reverse.kt.core.constants.ApplicationConstants;
+import com.reverse.kt.core.ui.HistoryView;
 import com.reverse.kt.core.ui.RegistrationModelView;
 import com.reverse.kt.main.processor.UserProcessor;
+import com.reverse.kt.main.service.ScheduleSessionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +17,11 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -34,6 +37,9 @@ public class ApplicationControllerTest {
 
     @Mock
     private UserProcessor userProcessor;
+
+    @Mock
+    private ScheduleSessionService scheduleSessionService;
 
     @InjectMocks
     private ApplicationController applicationController;
@@ -66,10 +72,22 @@ public class ApplicationControllerTest {
 
     @Test
     public void historyShouldSucceed() throws Exception{
+        //given
+        MockHttpSession httpSession = new MockHttpSession();
+        httpSession.setAttribute(ApplicationConstants.USER_PROFILE_SEQ,12);
+        when(scheduleSessionService.fetchHistoryViewForUser(anyInt())).
+                thenReturn(expectedDataSet());
+
         //then
-        mockMvc.perform(get("/load-history")
+        mockMvc.perform(get("/load-history").session(httpSession)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(view().name("history"));
+                .andExpect(view().name("history"))
+                .andExpect(model().attribute("historyList",hasSize(2)))
+                .andExpect(model().attribute("historyList",hasItem(allOf(
+                        hasProperty("scheduledSessionSeq", is(1)),
+                        hasProperty("videoDetails", is("video details")),
+                        hasProperty("videoName", is("test video"))
+                ))));
     }
 
     @Test
@@ -130,6 +148,11 @@ public class ApplicationControllerTest {
         rv.setProjectSelected("12");
         rv.setUserName("userName");
         return rv;
+    }
+
+    private List<HistoryView> expectedDataSet(){
+        return Arrays.asList(HistoryView.builder().scheduledSessionSeq(1).videoDetails("video details").videoName("test video").build(),
+                HistoryView.builder().scheduledSessionSeq(2).videoDetails("video details one").videoName("test video one").build());
     }
 }
 
