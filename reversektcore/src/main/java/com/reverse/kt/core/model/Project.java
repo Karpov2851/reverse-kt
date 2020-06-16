@@ -3,7 +3,7 @@ package com.reverse.kt.core.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,8 +20,8 @@ public class Project extends BaseEntity implements java.io.Serializable{
 
 
     @Builder
-    public Project(Integer projectSeq,CompanyMstr companyMstr, BusinessUnit businessUnit, String projectName,String projectDesc,
-                        Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public Project(Integer projectSeq, CompanyMstr companyMstr, BusinessUnit businessUnit, String projectName, String projectDesc,
+                   Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.projectSeq = projectSeq;
         this.companyMstr = companyMstr;

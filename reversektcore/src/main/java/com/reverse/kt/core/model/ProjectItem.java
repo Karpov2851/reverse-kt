@@ -3,7 +3,7 @@ package com.reverse.kt.core.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -19,7 +19,7 @@ public class ProjectItem extends BaseEntity{
 
     @Builder
     public ProjectItem(Integer projectItemSeq, String projectItemDesc,
-                   Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+                       Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.projectItemSeq = projectItemSeq;
         this.projectItemDesc = projectItemDesc;

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +21,8 @@ import java.util.Set;
 public class CompanyMstr extends BaseEntity{
 
     @Builder
-    public CompanyMstr(Integer companyMstrSeq,String companyName,String companyCd,Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public CompanyMstr(Integer companyMstrSeq, String companyName, String companyCd, Integer createdBy,
+                       Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.companyMstrSeq = companyMstrSeq;
         this.companyName = companyName;

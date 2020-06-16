@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by vikas on 02-04-2020.
@@ -25,11 +24,13 @@ public class BaseEntity {
     private Integer updatedBy = 0;
 
     @Column(name="CREATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    @Basic
+    private LocalDateTime createdDate;
     @Column(name="UPDATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedDate;
+
+    @Basic
+    private LocalDateTime updatedDate;
+
     @Column(name="STATUS")
     private Character status;
 

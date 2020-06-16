@@ -13,7 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.ParameterizedType;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -90,15 +90,14 @@ public abstract class GenericDao<T extends BaseEntity,PK> {
 
 
     private void initInsert(final T bean) {
-        final Date d = new Date();
-        bean.setCreatedDate(d);
-        bean.setUpdatedDate(d);
+        bean.setCreatedDate(LocalDateTime.now());
+        bean.setUpdatedDate(LocalDateTime.now());
         bean.setCreatedBy(0);
         bean.setUpdatedBy(0);
     }
 
     private void initUpdate(final T bean) {
-        bean.setUpdatedDate(new Date());
+        bean.setUpdatedDate(LocalDateTime.now());
     }
 
 

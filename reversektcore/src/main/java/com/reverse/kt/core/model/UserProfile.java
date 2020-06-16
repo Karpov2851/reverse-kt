@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by vikas on 02-04-2020.
@@ -19,7 +19,8 @@ import java.util.Date;
 public class UserProfile extends BaseEntity{
 
     @Builder
-    public UserProfile(UserRole userRole,CompanyMstr companyMstr,String userProfileImagePath,String userId,String password,Integer createdBy, Integer updatedBy, Date createdDate, Date updatedDate){
+    public UserProfile(UserRole userRole, CompanyMstr companyMstr, String userProfileImagePath, String userId,
+                       String password, Integer createdBy, Integer updatedBy, LocalDateTime createdDate, LocalDateTime updatedDate){
         super(createdBy,updatedBy,createdDate,updatedDate,'A');
         this.userRole = userRole;
         this.companyMstr = companyMstr;
