@@ -35,6 +35,10 @@ public class VideoDetails extends BaseEntity{
     @Column(name="VIDEO_DETAIL_SEQ")
     private Integer videoDetailSeq;
 
+    @OneToOne
+    @JoinColumn(name = "PROJECT_ITEM_SEQ")
+    private ProjectItem projectItem;
+
     @Column(name = "VIDEO_NAME")
     private String videoName;
 
@@ -46,4 +50,7 @@ public class VideoDetails extends BaseEntity{
 
     @Column(name = "VIDEO_DIRECTORY_REF_CD")
     private String videoDirectoryRefCd;
+
+    @Column(name = "SKILL_MSTR_SEQ_LIST")
+    private String skillMstrSeqList;
 }
