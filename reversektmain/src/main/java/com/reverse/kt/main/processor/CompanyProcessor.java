@@ -25,6 +25,11 @@ import java.util.stream.Collectors;
 @Transactional
 public class CompanyProcessor {
 
+
+    private UserService userService;
+    private ProjectService projectService;
+
+    //TODO: move this to a new constant file. Not supposed to be here
     public static enum OperationOps{
         BU,PROJ,PROJITEM,SKILL;
         public static OperationOps checkEnumValue(String val) throws IllegalArgumentException{
@@ -34,8 +39,7 @@ public class CompanyProcessor {
                     .orElseThrow(() -> new IllegalStateException(String.format("Unsupported type %s.", val)));
         }
     }
-    private UserService userService;
-    private ProjectService projectService;
+
 
     public Map<Object,Object> fetchCompanyRelatedEntity(Integer userProfileSeq,Map<String,Object> mapper,CompanyProcessor.OperationOps op) throws Exception{
         Map<Object,Object> dataMap = new HashMap<>();

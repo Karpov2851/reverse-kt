@@ -26,7 +26,7 @@
         <h1>Upload Lecture</h1>
         <div class="container-fluid">
             <div class="row">
-                <form id="upload-video-form" th:action="@{/save-upload}" th:object="${uploadLectureView}" method="post">
+                <form id="upload-video-form" th:action="@{/save-upload}" th:object="${uploadLectureView}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="video-name" class="text-black-50 font-weight-bold">Video Name</label>
                         <input type="text" th:field="${uploadLectureView.videoName}" class="form-control" id="video-name" placeholder="Enter video name">
@@ -48,13 +48,13 @@
 
                     <div class="form-group">
                         <label for="skill-set" class="text-black-50 font-weight-bold">Select Skill set</label>
-                        <select multiple class="form-control" id="skill-set" th:field="${uploadLectureView.skillMstrSelected}">
+                        <select multiple class="form-control deps" id="skill-set" th:field="${uploadLectureView.skillMstrSelected}">
                         </select>
                     </div>
 
                     <div class="custom-file form-group">
 
-                        <input type="file" class="custom-file-input" id="videoFileUpload" name="videoFileUpload">
+                        <input type="file" class="custom-file-input" th:field="${uploadLectureView.videoFileUpload}" id="videoFileUpload" name="videoFileUpload">
                         <label class="custom-file-label" for="videoFileUpload">Upload video file</label>
                     </div>
                     <div class="form-group" style="margin-top:50px;">

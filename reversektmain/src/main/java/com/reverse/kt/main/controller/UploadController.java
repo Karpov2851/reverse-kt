@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
@@ -52,9 +51,8 @@ public class UploadController {
 
     @PostMapping(value="/save-upload")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROJECT_MANAGER','ROLE_TECH_ARCH','ROLE_SCRUM_MSTR','ROLE_DIRECTOR')")
-    public ModelAndView saveUploadView(@RequestParam("videoFileUpload") MultipartFile file,@ModelAttribute UploadLectureView lectureView, HttpSession httpSession){
+    public ModelAndView saveUploadView(@ModelAttribute UploadLectureView lectureView, HttpSession httpSession){
         try{
-            lectureView.setVideoFileUpload(file);
             uploadProcessor.uploadLectureVideoDetails(lectureView);
             lectureView.setMessage("Sucessfully uploaded video");
             lectureView.setShowSuccess(true);
