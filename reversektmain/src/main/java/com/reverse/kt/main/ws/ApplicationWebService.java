@@ -5,6 +5,7 @@ import com.reverse.kt.core.model.UserProfile;
 import com.reverse.kt.core.ui.UiWebServiceRequest;
 import com.reverse.kt.core.ui.UiWebServiceResponse;
 import com.reverse.kt.main.processor.CompanyProcessor;
+import com.reverse.kt.main.processor.ProjectProcessor;
 import com.reverse.kt.main.processor.UserProcessor;
 import lombok.Setter;
 import org.apache.commons.io.IOUtils;
@@ -30,6 +31,8 @@ import java.util.Map;
 @RequestMapping(value = "/ws")
 public class ApplicationWebService {
 
+    private ProjectProcessor projectProcessor;
+
     private CompanyProcessor companyProcessor;
 
     private UserProcessor userProcessor;
@@ -45,9 +48,23 @@ public class ApplicationWebService {
             Map<Object,Object> map = companyProcessor.fetchCompanyRelatedEntity(userProfileSeq,uiWebServiceRequest.getCompanyRelatedParams(),op);
             return new ResponseEntity<>(map, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value="/fetch-skills")
+    public ResponseEntity<Map<String,Integer>> fetchSkillsForProjectItem(@RequestParam Integer projectItemSeq) {
+        try {
+            Map<String,Integer> skillsDropDownForProjectItem = projectProcessor.fetchSkillsDropDownForProjectItemSeq(projectItemSeq);
+            return new ResponseEntity<>(skillsDropDownForProjectItem,HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @CrossOrigin
     @PostMapping(value="/saveimage")
     public ResponseEntity<?> saveImage(HttpSession httpSession,HttpServletResponse response, @RequestParam("imageFile") MultipartFile file){
@@ -60,6 +77,7 @@ public class ApplicationWebService {
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             return new ResponseEntity<>(uiResponse,HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

@@ -76,6 +76,12 @@ public class WebSecurityTest {
                 .andExpect(status().isForbidden());
     }
 
+    @WithMockUser(username = "user_id",roles = {"EMPLOYEE"})
+    @Test
+    public void loadUploadViewUploadControllerShouldBeForbidden() throws Exception{
+        mockMvc.perform(get("/load-upload"))
+                .andExpect(status().isForbidden());
+    }
 
 
     @Test

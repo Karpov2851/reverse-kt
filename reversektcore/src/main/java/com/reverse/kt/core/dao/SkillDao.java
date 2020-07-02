@@ -5,10 +5,10 @@ import com.reverse.kt.core.model.ProjectItemSkill;
 import com.reverse.kt.core.model.SkillMstr;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,12 +18,12 @@ import java.util.List;
 public class SkillDao extends GenericDao<SkillMstr,Integer>{
 
     public List<SkillMstr> fetchSkillDetailsForProjectItemSeq(int projectItemSeq) throws Exception{
-        Root<SkillMstr> skillMstrRoot = getRoot();
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<SkillMstr> skillMstrCriteriaQuery = criteriaBuilder.createQuery(getEntityClass());
+        Root<SkillMstr> skillMstrRoot = skillMstrCriteriaQuery.from(getEntityClass());
         Join<SkillMstr,ProjectItemSkill> skillProjectItemJoin  = skillMstrRoot.join("projectItemSkills");
         Join<ProjectItemSkill,ProjectItem> projectItemSkillProjectItemJoin = skillProjectItemJoin.join("projectItem");
-        List<Predicate> conditions = new ArrayList<>();
-        conditions.add(getCriteriaBuilder().equal(projectItemSkillProjectItemJoin.get("projectItemSeq"), projectItemSeq));
-        setRoot(skillMstrRoot);
-        return findListOfEntireRecordsBasedOnCriteria(conditions.toArray(new Predicate[] {}));
+        skillMstrCriteriaQuery.where(criteriaBuilder.equal(projectItemSkillProjectItemJoin.get("projectItemSeq"), projectItemSeq));
+        return getEntityManager().createQuery(skillMstrCriteriaQuery).getResultList();
     }
 }

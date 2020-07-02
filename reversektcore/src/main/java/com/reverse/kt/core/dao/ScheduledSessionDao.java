@@ -4,10 +4,10 @@ import com.reverse.kt.core.model.ScheduledSession;
 import com.reverse.kt.core.model.ScheduledSessionUser;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,11 +17,11 @@ import java.util.List;
 public class ScheduledSessionDao extends GenericDao<ScheduledSession,Integer>{
 
     public List<ScheduledSession> fetchScheduledSessionForUser(int userProfileSeq) throws Exception{
-        Root<ScheduledSession> scheduledSessionRoot = getRoot();
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<ScheduledSession> scheduledSessionCriteriaQuery = criteriaBuilder.createQuery(getEntityClass());
+        Root<ScheduledSession> scheduledSessionRoot = scheduledSessionCriteriaQuery.from(getEntityClass());
         Join<ScheduledSession,ScheduledSessionUser> scheduledSessionUserJoin = scheduledSessionRoot.join("scheduledSessionUsers");
-        List<Predicate> conditions = new ArrayList<>();
-        conditions.add(getCriteriaBuilder().equal(scheduledSessionUserJoin.get("userProfile"), userProfileSeq));
-        setRoot(scheduledSessionRoot);
-        return findListOfEntireRecordsBasedOnCriteria(conditions.toArray(new Predicate[] {}));
+        scheduledSessionCriteriaQuery.where(criteriaBuilder.equal(scheduledSessionUserJoin.get("userProfile"),userProfileSeq));
+        return getEntityManager().createQuery(scheduledSessionCriteriaQuery).getResultList();
     }
 }

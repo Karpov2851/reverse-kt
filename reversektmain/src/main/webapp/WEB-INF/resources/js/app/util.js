@@ -37,9 +37,6 @@ define([
                 }
             });
         },
-        createSelectOption : function(idOfSelectOption){
-
-        },
 
         enableDisableDropDownMultiple : function(classAttr,isDisabled){
             $(classAttr).each(function( index ) {

@@ -5,7 +5,7 @@ define([
     'app/util'
 
 ], function($,toastr,bootstrap,util) {
-
+    console.log('view profile js loaded');
     var projectSelected = $( "#project option:selected" ).val();
     var projectItemSelected  = $( "#project_item option:selected" ).val();
 
@@ -51,7 +51,7 @@ define([
             "hideMethod": "hide"
         }
     };
-    console.log('view profile js loaded');
+
     toasterOptions();
 
     $("#upload-image").change(function(){

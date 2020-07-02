@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -37,7 +38,7 @@ public class ProjectItem extends BaseEntity{
     @OneToMany(
             cascade = CascadeType.ALL,orphanRemoval = true,mappedBy = "projectItem"
     )
-    @EqualsAndHashCode.Exclude private Set<ProjectItemSkill> projectItemSkills;
+    @EqualsAndHashCode.Exclude private Set<ProjectItemSkill> projectItemSkills = new HashSet<>();
 
     @Column(name = "PROJECT_ITEM_DESC",length = 50)
     private String projectItemDesc;

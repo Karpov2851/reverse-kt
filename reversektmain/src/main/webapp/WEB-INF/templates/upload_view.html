@@ -26,43 +26,36 @@
         <h1>Upload Lecture</h1>
         <div class="container-fluid">
             <div class="row">
-                <form>
+                <form id="upload-video-form" th:action="@{/save-upload}" th:object="${uploadLectureView}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="inputEmail" class="text-black-50 font-weight-bold">Video Name</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter video name">
+                        <label for="video-name" class="text-black-50 font-weight-bold">Video Name</label>
+                        <input type="text" th:field="${uploadLectureView.videoName}" class="form-control" id="video-name" placeholder="Enter video name">
                     </div>
                     <div class="form-group">
                         <label for="videodetail" class="text-black-50 font-weight-bold">Video details</label>
-                        <textarea class="form-control" placeholder="Enter video details"
+                        <textarea class="form-control" placeholder="Enter video details" th:field="${uploadLectureView.videoDetails}"
                                   id="videodetail" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="project-item" class="text-black-50 font-weight-bold">Select Project Item</label>
-                        <select class="form-control" id="project-item">
-                            <option>--Select--</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select class="form-control" id="project-item" th:field="${uploadLectureView.projectItemSelected}">
+                            <option value="">----Select----</option>
+                            <option th:each="entry : ${uploadLectureView.projectItemDropDown.entrySet()}" th:value="${entry.value}" th:text="${entry.key}">
+
+                            </option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="skill-set" class="text-black-50 font-weight-bold">Select Skill set</label>
-                        <select multiple class="form-control" id="skill-set">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select multiple class="form-control deps" id="skill-set" th:field="${uploadLectureView.skillMstrSelected}">
                         </select>
                     </div>
 
                     <div class="custom-file form-group">
 
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Upload video file</label>
+                        <input type="file" class="custom-file-input" th:field="${uploadLectureView.videoFileUpload}" id="videoFileUpload" name="videoFileUpload">
+                        <label class="custom-file-label" for="videoFileUpload">Upload video file</label>
                     </div>
                     <div class="form-group" style="margin-top:50px;">
                         <button type="submit" class="btn btn-primary">Upload</button>
