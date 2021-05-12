@@ -17,7 +17,7 @@
         <hibernate.version>5.3.7.Final</hibernate.version>
         <mysql.connector.version>5.1.31</mysql.connector.version>
         <springframework.version>4.3.0.RELEASE</springframework.version>
-        <spring.security.version>4.2.15.RELEASE</spring.security.version>
+        <spring.security.version>5.2.10.RELEASE</spring.security.version>
         <springframework.version.test>4.3.1.RELEASE</springframework.version.test>
         <spring.security.test.version>4.2.15.RELEASE</spring.security.test.version>
         <view.resolver.version>3.0.9.RELEASE</view.resolver.version>
